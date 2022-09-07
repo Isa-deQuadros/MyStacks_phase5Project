@@ -1,14 +1,13 @@
-import { useState } from "react";
 import styled from "styled-components";
 
-import LibraryContainer from './library_container'
+import LibraryContainer from './Library_container'
 import NavBar from './navBar'
 
 const Container = styled.div`
 
 `
 
-function HomePage({functionForLogOut, UserBookArray, currentUser}){
+function HomePage({functionForLogOut, currentUser, currentUserBooks}){
 
 
     
@@ -18,7 +17,7 @@ function HomePage({functionForLogOut, UserBookArray, currentUser}){
                 <NavBar functionForLogOut={functionForLogOut}/>
                 <h4> Welcome {currentUser.user_name}</h4>
             </div>
-            <LibraryContainer UserBookArray={UserBookArray}/>
+            <LibraryContainer currentUserBooks={currentUserBooks}/>
         </Container>
     )
 }

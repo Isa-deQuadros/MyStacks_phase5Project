@@ -17,12 +17,14 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
     })
 
     const navigate= useNavigate()
+    console.log("BooksFetched", UserBookArray)
 
     const handleSubmit=(synthEvent)=>{
+        console.log("This is the form data:", newBookFormData)
         synthEvent.preventDefault()
         fetch('/books', {
             method:"POST",
-            header:{"Content-Type": "application/json"},
+            headers:{"Content-Type": "application/json"},
             body: JSON.stringify(newBookFormData)
         })
         .then(r => r.json())
@@ -30,11 +32,10 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
                 SetUserBookArrayFunction(newBookdata, ...UserBookArray)
                 navigate('/home')
         } )
-
     }
 
     const handleChange=(synthEvent)=>{
-        setNewBookFormData({newBookFormData, [synthEvent.target.name]: synthEvent.target.value})
+        setNewBookFormData({...newBookFormData, [synthEvent.target.name]: synthEvent.target.value})
     }
 
     function handleClick(){
@@ -55,13 +56,13 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
                     <br/>
                     <label> Genre </label>
                     <input type="text" name="genre" onChange={handleChange}/>
-                    <br/>
+                    {/* <br/>
                     <label> Trope </label>
                     <input type="text" name="trope" onChange={handleChange}/>
                     <br/>
                     <label> Location </label>
                     <input type="text" name="location" onChange={handleChange}/>
-                    <br/>
+                    <br/> */}
                     {/* <label> Condition </label>
                     <select name='condition' onChange={}>
                         <option value="new"> new </option>
@@ -70,9 +71,9 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
                         <option value=" well loved"> well loved </option>
                         <option value=" very well loved"> very well loved</option>
                     </select> */}
-                    <label> Comment </label>
+                    {/* <label> Comment </label>
                     <input type="text" name="comment" onChange={handleChange}/>
-                    <br/>
+                    <br/> */}
                     <button type="submit"> Add Book </button>
             </form>
         </>

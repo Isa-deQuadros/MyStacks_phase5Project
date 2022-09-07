@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import BackgroundImage from '../images/thomas-kelley-unsplash.jpg' 
+// import BackgroundImage from '../images/thomas-kelley-unsplash.jpg' 
 
 
 

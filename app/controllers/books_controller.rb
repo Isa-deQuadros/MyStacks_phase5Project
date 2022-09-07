@@ -9,17 +9,42 @@ class BooksController < ApplicationController
     #  filters through locations if exists selects that if not creates new one 
     # rails create_or_findby method (already exists)
 
-    # def index 
-    #     find_user = User.find_by(id: params[:id])
-    #     find_books_belonging_to_user = Book.find_by(user_id: params[:user_id])
-    #     if find_user.id === find_book_user.id
-    #         render json: 
-
-    #     end
-    # end
+    
+    def index
+        render json: Book.all
+    end
 
 
+    def create
+        current_user = User.find_by_id(session[:user_id])
+        if current_user
+            new_book= current_user.books.create(creating_new_books_params)
+            byebug
+            new_or_existing_genre= Genre.find_or_create_by(params[:genre])
+            BookGenre.create(book_id: new_book.id, genre_id:new_or_existing_genre)
+
+            render json: new_book, serializer: BookCreateSerializer
+        end
+
+    end
 
 
+    def destroy 
+        find_book = Book.find_by_id(params[:id])
+        if find_book
+            find_book.destroy
+            head :no_content
+        end
+    end
+
+private 
+
+    def find_books_belonging_to_user
+        find_books = Book.find_by(user_id: params[:user_id])
+    end
+
+    def creating_new_books_params 
+        params.permit(:title, :price, :comment, :user_id)
+    end
 
 end

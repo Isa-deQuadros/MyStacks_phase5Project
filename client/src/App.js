@@ -1,5 +1,6 @@
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import { useEffect, useState} from 'react'
 
 import LandingPage from './components/LandingPage'
 import LogIn from './components/Log_in'
@@ -7,8 +8,7 @@ import SignUp from './components/Sign_up'
 import Home from './components/HomePage'
 import UserProfile from './components/userProfile'
 import AddNewBookForm from './components/add_new_book_form'
-import { useEffect, useState} from 'react'
-import LibraryDisplay from './components/library_container'
+import LibraryDisplay from './components/Library_container'
 
 const Container = styled.div`
 `
@@ -18,13 +18,15 @@ function App() {
 
 /* THIS IS ANYTHING USER Session RELATED */
 const [currentUser, setCurrentUser] = useState(null)
+
 const navigate=useNavigate()
 useEffect(()=>{
   fetch('/userLoggedIn')
   .then(r=>r.json())
   .then(data => {
-                console.log(data)
+                // console.log("This is the data", data)
                 setCurrentUser(data)
+                // console.log(data.books)
                 
   })
 },[]
@@ -78,21 +80,15 @@ useEffect(()=>{
         headers:{"Content-Type": "application/json"},
         body: JSON.stringify(userSignUpData)
       })
-      .then(r => r.json())
-      // .then(r => {
-      //   if(r.ok){
-      //     r.json().then(user => {setCurrentUser(user)
-      //                             console.log(user)
-      //                             // navigate('/home/${currentUser.id}')
-      //     })
-      //   }
+      .then(r => {
+        if(r.ok){
+          r.json().then(user => {setCurrentUser(user)
+                                  console.log(user)
+                                  navigate('/home')
+          })
+        }
 
-      // }) 
-      
-      .then((theUser) => {
-          console.log(theUser)
-          setCurrentUser(theUser)
-      })
+      }) 
     }
 
     const handleLogOut = () =>{
@@ -100,24 +96,22 @@ useEffect(()=>{
       .then(r =>r.json())
       .then( deleteUserSession => {
         setCurrentUser(null)
-        navigate("/")
-        // setCurrentUserBooks([])
+        navigate.push("/")
       })
     }
   
 
 /* THIS IS ANYTHING BOOKS RELATED */
+  const [currentUserBooks, setCurrentUserBooks]= useState([])
 
-const [allUserBooks, setallUserBooks]= useState([])
-  useEffect(()=> {
-    fetch('/books')
+  useEffect(()=>{
+    fetch(`/thisUsersBooks`)
     .then(r => r.json())
-    .then(booksArray => {
-                          setallUserBooks(booksArray)
-    })
-  }, [])
+    .then( data => { setCurrentUserBooks(data)
+                    console.log("The Current UserBooks", data)}
+        )}, [])
 
-
+        console.log("The current users books", currentUserBooks)
   /* THIS IS ANYTHING AUTHOR RELATED */
 
   /* THIS IS ANYTHING GENRE RELATED */
@@ -149,22 +143,22 @@ const [allUserBooks, setallUserBooks]= useState([])
         </Route>
         
         <Route path="/home" element={<Home 
-                                            // UserBookArray={allUserBooks} 
                                             functionForLogOut={handleLogOut}
                                             currentUser={currentUser}
+                                            currentUserBooks={currentUserBooks}
                                             />}>
         </Route>
         <Route path="/library" element={<LibraryDisplay
-                                                        userBookInformation={allUserBooks}
-        
-                                        />}>
+                                                        
+                                        />
+                                        }>
         </Route>
         
         <Route path="/user_profile" element={<UserProfile currentUserInformation={currentUser}/>}> </Route>
         
         <Route path="/add_a_new_book" element={<AddNewBookForm 
-                                                              UserBookArray={allUserBooks} 
-                                                              SetUserBookArrayFunction={setallUserBooks}
+                                                              UserBookArray={currentUserBooks} 
+                                                              SetUserBookArrayFunction={setCurrentUserBooks}
                                                 />}>
         </Route>
       </Routes>

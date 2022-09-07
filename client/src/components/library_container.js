@@ -7,13 +7,15 @@ const Container= styled.div`
 
 `
 
-function LibraryDisplay({userBookInformation}){
+function LibraryDisplay({currentUserBooks}){
+    console.log("These Books", currentUserBooks)
 
     
     return(
         <Container>
             <Link to="/add_a_new_book"> Add New Book </Link>
-            {/* <BookCard userBookInformation={userBookInformation}  also has to be mapped /> */}
+            {currentUserBooks.map(() => { <BookCard currentUserBookInfo={currentUserBooks}/>
+            })}
         </Container>
     )
 }

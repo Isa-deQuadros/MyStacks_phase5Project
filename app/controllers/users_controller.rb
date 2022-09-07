@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    before_action :user_find_method, except[ :index, :create ]
+    before_action :user_find_method, except: [ :index, :create ]
 
 
     def index
@@ -14,6 +14,12 @@ class UsersController < ApplicationController
             render json:{error:"User Not Found"}
         end
     end
+
+    def my_books
+        current_user = User.find_by(id: session[:user_id])
+        render json: current_user.books
+    end
+
 
     def create 
         new_user= User.create( new_user_params )

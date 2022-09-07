@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import NavBar from'../images/closed_Nav.png'
