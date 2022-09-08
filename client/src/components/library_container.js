@@ -4,26 +4,44 @@ import BookCard from'./book_card'
 
 
 const Container= styled.div`
+    margin: 10px;
+
+    .addNewBookButton{
+        margin-bottom: 10px;;
+    }
+    .libraryCards{
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 30px;
+        column-gap: 15px;
+        
+        }
 
 `
 
-function LibraryDisplay({currentUserBooks}){
-    console.log("This Users Library", currentUserBooks)
+function LibraryDisplay({currentUserBooks, setCurrentUserBooks}){
 
     const navigate= useNavigate()
 
 
         return(
             <Container>
-                <button onClick={()=>{navigate(`/add_a_new_book`)}}> Add New Book </button>
+                < div className="addNewBookButton"> 
+                    <button onClick={()=>{navigate(`/add_a_new_book`)}}> Add New Book </button>
+                </div>
+                <div className="libraryCards">
                 {currentUserBooks.map((eachBook) => ( <BookCard key={eachBook.id} 
                                                             title={eachBook.title} 
                                                             comment={eachBook.comment}
                                                             price={eachBook.price}
+                                                            eachBookID={eachBook.id}
                                                             currentUserBooks={currentUserBooks}
+                                                            setCurrentUserBooks={setCurrentUserBooks}
                                                             />
                                                         )
                                                         )}
+                </div>
+                
             </Container>
         )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+
 import styled from "styled-components";
 
 import LibraryContainer from './Library_container'
@@ -8,8 +8,8 @@ const Container = styled.div`
 
 `
 
-function HomePage({functionForLogOut, currentUser, currentUserBooks}){
-    console.log("User Books State", currentUserBooks)
+function HomePage({functionForLogOut, currentUser, currentUserBooks, setCurrentUserBooks}){
+    // console.log("User Books State", currentUserBooks)
 
 
     
@@ -19,7 +19,7 @@ function HomePage({functionForLogOut, currentUser, currentUserBooks}){
                 <NavBar functionForLogOut={functionForLogOut}/>
                 <h4> Welcome {currentUser.user_name}</h4>
             </div>
-            <LibraryContainer currentUserBooks={currentUserBooks}/>
+            <LibraryContainer currentUserBooks={currentUserBooks} setCurrentUserBooks={setCurrentUserBooks}/>
         </Container>
     )
 }

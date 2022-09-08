@@ -8,7 +8,6 @@ import SignUp from './components/Sign_up'
 import Home from './components/HomePage'
 import UserProfile from './components/userProfile'
 import AddNewBookForm from './components/add_new_book_form'
-import LibraryDisplay from './components/Library_container'
 
 const Container = styled.div`
 `
@@ -78,9 +77,8 @@ const [currentUserBooks, setCurrentUserBooks] = useState([])
       })
       .then(r=> r.json())
       .then( user => { setCurrentUser(user)
-        console.log(user)
         setCurrentUserBooks(user.books)
-            // if(currentUser){navigate('/home')
+            navigate('/home')
           }
       )
     }
@@ -94,7 +92,6 @@ const [currentUserBooks, setCurrentUserBooks] = useState([])
         
       })
     }
-
 
 
   return (
@@ -118,7 +115,8 @@ const [currentUserBooks, setCurrentUserBooks] = useState([])
         <Route path="/home" element={<Home 
                                             functionForLogOut={handleLogOut}
                                             currentUser={currentUser}
-                                            currentUserBooks={currentUserBooks} 
+                                            currentUserBooks={currentUserBooks}
+                                            setCurrentUserBooks={setCurrentUserBooks}
                                             />}>
         </Route>
         

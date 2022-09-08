@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom"
 
 
 function NewBookForm({currentUserBooks, setCurrentUserBooks}){
-    console.log("Before new book added", currentUserBooks)
-    console.log("FUnction for state", setCurrentUserBooks)
 
     const [newBookFormData, setNewBookFormData] = useState({
         title:'',
@@ -65,6 +63,9 @@ function NewBookForm({currentUserBooks, setCurrentUserBooks}){
                     {/* <label> Location </label>
                     <input type="text" name="location" onChange={handleChange}/>
                     <br/> */}
+                    {/* <label> Condition <label/>
+                    <label> Status <label/>
+                    */}
                     <label> Price </label>
                     <input type="text" name="price" onChange={handleChange}/>
                     <br/>
