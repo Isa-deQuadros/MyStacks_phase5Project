@@ -17,13 +17,25 @@ class BooksController < ApplicationController
 
     def create
         current_user = User.find_by_id(session[:user_id])
+        # its putting the new books inside the user_id space
         if current_user
             new_book= current_user.books.create(creating_new_books_params)
             byebug
-            new_or_existing_genre= Genre.find_or_create_by(params[:genre])
-            BookGenre.create(book_id: new_book.id, genre_id:new_or_existing_genre)
+            new_or_existing_author= Author.find_or_create_by(params[:author])
+            new_bookAuthor = BookAuthor.create(book_id: new_book.id, author_id: new_or_existing_author)
+            byebug
+
+            # new_or_existing_genre= Genre.find_or_create_by(params[:genre])
+            # BookGenre.create(book_id: new_book.id, genre_id:new_or_existing_genre)
+            
+            # new_or_existing_trope = Trope.find_or_create_by(params[:trope])
+            # BookTrope.create(book_id: new_book.id, trope_id:new_or_existing_trope)
+            
+            # new_or_existing_location = Location.find_or_create_by(params[:location])
+            # BookLocation.create(book_id: new_book.id, location_id:new_or_existing_location)
 
             render json: new_book, serializer: BookCreateSerializer
+            # render json: new_book
         end
 
     end
@@ -46,5 +58,7 @@ private
     def creating_new_books_params 
         params.permit(:title, :price, :comment, :user_id)
     end
+
+    
 
 end

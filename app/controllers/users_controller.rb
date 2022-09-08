@@ -15,11 +15,6 @@ class UsersController < ApplicationController
         end
     end
 
-    def my_books
-        current_user = User.find_by(id: session[:user_id])
-        render json: current_user.books
-    end
-
 
     def create 
         new_user= User.create( new_user_params )

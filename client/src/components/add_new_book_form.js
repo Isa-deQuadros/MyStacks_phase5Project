@@ -6,21 +6,22 @@ import { useNavigate } from "react-router-dom"
 
 
 
-function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
+function NewBookForm({currentUserBooks, setCurrentUserBooks}){
+    console.log("Before new book added", currentUserBooks)
+    console.log("FUnction for state", setCurrentUserBooks)
+
     const [newBookFormData, setNewBookFormData] = useState({
         title:'',
         author:'',
-        genre:'',
-        trope:'',
-        location:'',
+        // genre:'',
+        // trope:'',
+        price:'',
+        // location:'',
         comment:''
     })
 
     const navigate= useNavigate()
-    console.log("BooksFetched", UserBookArray)
-
-    const handleSubmit=(synthEvent)=>{
-        console.log("This is the form data:", newBookFormData)
+    const HandleSubmit=(synthEvent)=>{
         synthEvent.preventDefault()
         fetch('/books', {
             method:"POST",
@@ -28,9 +29,9 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
             body: JSON.stringify(newBookFormData)
         })
         .then(r => r.json())
-        .then (newBookdata =>{
-                SetUserBookArrayFunction(newBookdata, ...UserBookArray)
-                navigate('/home')
+        .then (() =>{ console.log(newBookFormData)
+                setCurrentUserBooks([...currentUserBooks, newBookFormData])
+                navigate(`/home`)
         } )
     }
 
@@ -45,7 +46,7 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
     return(
         <>
             <button onClick={handleClick}> Close </button>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={HandleSubmit}>
                 <h2> Add A New Book </h2>
 
                     <label> Title </label>
@@ -54,26 +55,22 @@ function NewBookForm({UserBookArray, SetUserBookArrayFunction}){
                     <label> Author </label>
                     <input type="text" name="author" onChange={handleChange}/>
                     <br/>
+                    {/*
                     <label> Genre </label>
                     <input type="text" name="genre" onChange={handleChange}/>
-                    {/* <br/>
-                    <label> Trope </label>
+                    <br/> */}
+                    {/* <label> Trope </label>
                     <input type="text" name="trope" onChange={handleChange}/>
-                    <br/>
-                    <label> Location </label>
+                    <br/> */}
+                    {/* <label> Location </label>
                     <input type="text" name="location" onChange={handleChange}/>
                     <br/> */}
-                    {/* <label> Condition </label>
-                    <select name='condition' onChange={}>
-                        <option value="new"> new </option>
-                        <option value='slightly worn'> slightly worn </option>
-                        <option value='loved'> loved </option>
-                        <option value=" well loved"> well loved </option>
-                        <option value=" very well loved"> very well loved</option>
-                    </select> */}
-                    {/* <label> Comment </label>
+                    <label> Price </label>
+                    <input type="text" name="price" onChange={handleChange}/>
+                    <br/>
+                    <label> Comment </label>
                     <input type="text" name="comment" onChange={handleChange}/>
-                    <br/> */}
+                    <br/>
                     <button type="submit"> Add Book </button>
             </form>
         </>
