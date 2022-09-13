@@ -11,4 +11,5 @@ class Book < ApplicationRecord
   has_many :locations, through: :book_locations
   has_many :tropes, through: :book_tropes
 
+  accepts_nested_attributes_for :genres
 end

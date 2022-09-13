@@ -4,17 +4,23 @@ import BookCard from'./book_card'
 
 
 const Container= styled.div`
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+    margin-bottom: 5px;;
+    font-family: 'Montaga';
 
     .addNewBookButton{
-        margin-bottom: 10px;;
+        margin-bottom: 10px;
+    }
+    button{
+        font-size: 12px;
     }
     .libraryCards{
         display: flex;
         flex-wrap: wrap;
-        row-gap: 30px;
-        column-gap: 15px;
-        
+        row-gap: 10px;
+        column-gap: 5px;
         }
 
 `
@@ -33,7 +39,10 @@ function LibraryDisplay({currentUserBooks, setCurrentUserBooks}){
                 {currentUserBooks.map((eachBook) => ( <BookCard key={eachBook.id} 
                                                             title={eachBook.title} 
                                                             comment={eachBook.comment}
-                                                            price={eachBook.price}
+                                                            // author={eachBook.author}
+                                                            // price={eachBook.price}
+                                                            genre={eachBook.genre}
+                                                            // location={eachBook.location}
                                                             eachBookID={eachBook.id}
                                                             currentUserBooks={currentUserBooks}
                                                             setCurrentUserBooks={setCurrentUserBooks}

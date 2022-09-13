@@ -8,8 +8,12 @@ import SignUp from './components/Sign_up'
 import Home from './components/HomePage'
 import UserProfile from './components/userProfile'
 import AddNewBookForm from './components/add_new_book_form'
+import FuturePlans from './components/future_plans'
+import NewBookForm2 from './components/future_plans_components/addNewBookForm2'
 
 const Container = styled.div`
+  display: flex;
+  justify-content: center;
 `
 
 
@@ -17,6 +21,7 @@ function App() {
 
 const [currentUser, setCurrentUser] = useState(null)
 const [currentUserBooks, setCurrentUserBooks] = useState([])
+const [Ver2CurrentBooks, setVer2CurrentBooks] = useState([])
 
   const navigate=useNavigate()
 
@@ -125,6 +130,9 @@ const [currentUserBooks, setCurrentUserBooks] = useState([])
         <Route path="/add_a_new_book" element={<AddNewBookForm currentUserBooks={currentUserBooks} 
                                                               setCurrentUserBooks={setCurrentUserBooks}/>}>
         </Route>
+
+        {/* <Route path="/plans" element={<FuturePlans  Ver2CurrentBooks={Ver2CurrentBooks} setVer2CurrentBooks={Ver2CurrentBooks}/>}></Route> */}
+        {/* <Route path="/addNewBookv2" element={<NewBookForm2  Ver2CurrentBooks={Ver2CurrentBooks} setVer2CurrentBooks={setVer2CurrentBooks}/>}></Route> */}
       </Routes>
     </Container>
   );
