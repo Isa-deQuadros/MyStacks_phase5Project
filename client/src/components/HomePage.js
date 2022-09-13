@@ -1,7 +1,7 @@
 
 import styled from "styled-components";
 
-import LibraryContainer from './Library_container'
+import LibraryContainer from './library_container'
 import NavBar from './navBar'
 
 

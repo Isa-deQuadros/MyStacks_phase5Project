@@ -34,6 +34,12 @@ function NewBookForm({currentUserBooks, setCurrentUserBooks}){
 
     const [newBookFormData, setNewBookFormData] = useState({
         title:'',
+        first_name:'',
+        last_name:'',
+        genre:'',
+        trope:'',
+        price:'',
+        location:'',
         comment:''
     })
 
@@ -61,22 +67,38 @@ function NewBookForm({currentUserBooks, setCurrentUserBooks}){
     }
 
     return(
-        <Container>
-            <img onClick={handleClick} src={Close} alt="close" quality={100} height={10} width={10}/>
+        <>
+            <button onClick={handleClick}> Close </button>
             <form onSubmit={HandleSubmit}>
                 <h2> Add A New Book </h2>
 
-                    <label> Title: </label>
+                    <label> Title </label>
                     <input type="text" name="title" onChange={handleChange}/>
                     <br/>
+                    <label> Author First Name</label>
+                    <input type="text" name="first_name" onChange={handleChange}/>
                     <br/>
-                    <label> Comment: </label>
+                    <label> Author Last Name</label>
+                    <input type="text" name="last_name" onChange={handleChange}/>
+                    <br/>
+                    <label> Genre </label>
+                    <input type="text" name="genre" onChange={handleChange}/>
+                    <br/> 
+                    <label> Trope </label>
+                    <input type="text" name="trope" onChange={handleChange}/>
+                    <br/> 
+                    <label> Location </label>
+                    <input type="text" name="location" onChange={handleChange}/>
+                    <br/>
+                    <label> Price </label>
+                    <input type="text" name="price" onChange={handleChange}/>
+                    <br/> 
+                    <label> Comment </label>
                     <input type="text" name="comment" onChange={handleChange}/>
-                    <br/>
                     <br/>
                     <button type="submit"> Add Book </button>
             </form>
-        </Container>
+        </>
     )
 }
 export default NewBookForm
