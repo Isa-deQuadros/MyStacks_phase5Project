@@ -26,6 +26,7 @@ const Container= styled.div`
 `
 
 function LibraryDisplay({currentUserBooks, setCurrentUserBooks}){
+    console.log("The Books:", currentUserBooks)
 
     const navigate= useNavigate()
 
@@ -39,10 +40,11 @@ function LibraryDisplay({currentUserBooks, setCurrentUserBooks}){
                 {currentUserBooks.map((eachBook) => ( <BookCard key={eachBook.id} 
                                                             title={eachBook.title} 
                                                             comment={eachBook.comment}
-                                                            // author={eachBook.author}
-                                                            // price={eachBook.price}
+                                                            author={eachBook.author}
+                                                            price={eachBook.price}
                                                             genre={eachBook.genre}
-                                                            // location={eachBook.location}
+                                                            trope={eachBook.trope}
+                                                            location={eachBook.location}
                                                             eachBookID={eachBook.id}
                                                             currentUserBooks={currentUserBooks}
                                                             setCurrentUserBooks={setCurrentUserBooks}

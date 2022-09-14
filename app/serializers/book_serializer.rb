@@ -1,7 +1,7 @@
 class BookSerializer < ActiveModel::Serializer
   attributes :id, :title, :price, :comment, :user_id
 
-  has_one :authors
+  has_many :authors
   def author_first_name
     object.author.first_name
   end
@@ -13,9 +13,15 @@ class BookSerializer < ActiveModel::Serializer
   def book_genres
     object.genre.name
   end
+
+  has_many :tropes
+  def book_trope
+    object.genre.name
+  end
   
   has_many :locations
   def book_locations
     object.location.name
   end
+
 end

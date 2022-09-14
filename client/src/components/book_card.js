@@ -35,10 +35,11 @@ const Container= styled.div`
 const BackOfCard = styled.div`
     width: 250px;
     height: 300px;
-    background-color: #000000;
+    background-color: #76818E;
     border: 2px solid white;
     position: fixed;
     z-index: 1;
+    font-size: 14px;
 
     img{
         background-color: whitesmoke;
@@ -53,7 +54,7 @@ const BackOfCard = styled.div`
 
 `
 
-function BookCard({title, comment, setCurrentUserBooks, eachBookID}){
+function BookCard({title, comment, author, genre, trope, location, price, setCurrentUserBooks, eachBookID}){
     const [showingfrontofBookCard, setShowingFrontofBookCard]= useState(true)
     function setingBackofCard(){
         setShowingFrontofBookCard(!showingfrontofBookCard)
@@ -70,7 +71,7 @@ function BookCard({title, comment, setCurrentUserBooks, eachBookID}){
     function deleteClick(){
         fetch(`/books/${eachBookID}`, {method:"DELETE"})
         .then(r => r.json())
-        .then(()=> deleteBooks(eachBookID))
+        .then(()=> {deleteBooks(eachBookID)})
     }
 
     function displayBackOfCard(){
@@ -79,6 +80,11 @@ function BookCard({title, comment, setCurrentUserBooks, eachBookID}){
                 <div className='contents'> 
                     <img onClick={setingBackofCard} src={Close} alt="close" height={15} width={15}/>
                     <p>Title: {title} </p>
+                    {/* <p> Author: {author.first_name} {author.last_name} </p> */}
+                    <p> Genre: {genre} </p>
+                    <p> Trope: {trope} </p>
+                    <p> Location: {location} </p>
+                    <p> Price: ${price}</p>
                     <p>Comment: {comment}</p>
                     <button onClick={deleteClick} className="delete"> Delete </button>
                 </div>

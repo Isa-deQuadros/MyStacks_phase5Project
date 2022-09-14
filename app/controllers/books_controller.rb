@@ -25,7 +25,6 @@ class BooksController < ApplicationController
             BookLocation.create(book_id: new_book.id, location_id:new_or_existing_location.id)
 
             render json: new_book, serializer: BookCreateSerializer
-            # render json: new_book
         end
 
     end
@@ -41,9 +40,6 @@ class BooksController < ApplicationController
 
 private 
 
-    # def find_books_belonging_to_user
-    #     find_books = Book.find_by(user_id: params[:user_id])
-    # end
 
     def creating_new_books_params 
         params.permit(:title, :price, :comment, :user_id)

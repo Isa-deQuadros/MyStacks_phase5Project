@@ -1,7 +1,7 @@
 class BookCreateSerializer < ActiveModel::Serializer
   attributes :id, :title, :comment, :user_id
 
-  has_one :authors
+  has_many :authors
   def author_first_name
     object.author.first_name
   end
