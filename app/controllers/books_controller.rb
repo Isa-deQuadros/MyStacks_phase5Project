@@ -2,7 +2,8 @@ class BooksController < ApplicationController
 
     
     def index
-        render json: Book.all
+        # render json: Book.all, each_serializer: BookCreateSerializer
+        render json: Book.all, each_serializer: BookSerializer
     end
 
 
@@ -35,6 +36,8 @@ class BooksController < ApplicationController
         if find_book
             find_book.destroy
             render json: {}
+        else 
+            render json: {error: "This is going wrong"}
         end
     end
 

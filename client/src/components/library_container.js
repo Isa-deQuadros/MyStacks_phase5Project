@@ -6,12 +6,13 @@ import BookCard from'./book_card'
 const Container= styled.div`
     margin-top: 10px;
     margin-right: 3px;
-    margin-left: 3px;
+    margin-left: 5px;
     margin-bottom: 5px;;
     font-family: 'Montaga';
 
     .addNewBookButton{
         margin-bottom: 10px;
+        margin-left: 5px;
     }
     button{
         font-size: 12px;
@@ -21,6 +22,7 @@ const Container= styled.div`
         flex-wrap: wrap;
         row-gap: 10px;
         column-gap: 5px;
+        margin-left: 16px;
         }
 
 `
@@ -46,6 +48,7 @@ function LibraryDisplay({currentUserBooks, setCurrentUserBooks}){
                                                             trope={eachBook.trope}
                                                             location={eachBook.location}
                                                             eachBookID={eachBook.id}
+                                                            eachBook={eachBook}
                                                             currentUserBooks={currentUserBooks}
                                                             setCurrentUserBooks={setCurrentUserBooks}
                                                             />

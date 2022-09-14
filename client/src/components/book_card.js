@@ -41,12 +41,27 @@ const BackOfCard = styled.div`
     z-index: 1;
     font-size: 14px;
 
+    h2{
+        text-align: center;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        border-top: 2px solid #bbd8b3;
+        border-bottom: 2px solid #bbd8b3;
+        margin-top: 0px;;
+    }
+
     img{
-        background-color: whitesmoke;
         margin: 8px;
     }
     img:hover{
         background-color:#bbd8b3 ;
+    }
+    button{
+        font-size: 10px;
+        height: 16px;
+        width: 50px;
+        background-color: black;
+        color: #bbd8b3;
     }
     button:hover{
         background-color: #bbd8b3;
@@ -54,18 +69,23 @@ const BackOfCard = styled.div`
 
 `
 
-function BookCard({title, comment, author, genre, trope, location, price, setCurrentUserBooks, eachBookID}){
+function BookCard({title, comment, author, genre, trope, location, price, setCurrentUserBooks, eachBookID, currentUserBooks, eachBook}){
     const [showingfrontofBookCard, setShowingFrontofBookCard]= useState(true)
     function setingBackofCard(){
         setShowingFrontofBookCard(!showingfrontofBookCard)
     }
+    //  have to map through eachBook to get the stuff inside, there are several arrays (author, genre, location, trope)
+    // const bookgenre= eachBook.book_genres.map((eachItem)=> {console.log(eachItem.name)})
+    // const booklocation= eachBook.book_locations.map((eachItem)=> {console.log(eachItem.name)})
+    // const booktrope= eachBook.book_tropes.map((eachItem)=> {console.log(eachItem.name)})
+    // const firstName= eachBook.author_name.map((eachItem)=> {console.log(eachItem.first_name)})
+    // const lastName= eachBook.author_name.map((eachItem)=> {console.log(eachItem.last_name)})
 
+
+    
+    
     function deleteBooks(id){
-        setCurrentUserBooks((prevBook) => {
-            const filterBooksById = prevBook.filter(
-                (book) => book.id !== id
-            ); return filterBooksById
-        })
+        setCurrentUserBooks(currentUserBooks.filter((book)=> book.id !== id))
     }
 
     function deleteClick(){
@@ -79,8 +99,8 @@ function BookCard({title, comment, author, genre, trope, location, price, setCur
             <BackOfCard>
                 <div className='contents'> 
                     <img onClick={setingBackofCard} src={Close} alt="close" height={15} width={15}/>
-                    <p>Title: {title} </p>
-                    {/* <p> Author: {author.first_name} {author.last_name} </p> */}
+                    <h2>Title: {title} </h2>
+                    {/* <p> Author: {author} {author} </p> */}
                     <p> Genre: {genre} </p>
                     <p> Trope: {trope} </p>
                     <p> Location: {location} </p>

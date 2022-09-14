@@ -77,7 +77,7 @@ function NewBookForm({currentUserBooks, setCurrentUserBooks}){
             body: JSON.stringify(newBookFormData)
         })
         .then(r => r.json())
-        .then (() =>{ console.log(newBookFormData)
+        .then (() =>{
                 setCurrentUserBooks([...currentUserBooks, newBookFormData])
                 navigate(`/home`)
         } )
@@ -113,6 +113,7 @@ function NewBookForm({currentUserBooks, setCurrentUserBooks}){
                     <div className="parttwo"> 
                         <label>Location:</label>
                         <input type="text" placeholder="location" name="location" onChange={handleChange}/>
+                        <br/>
                         <label>Price:</label>
                         <input type="text" placeholder="price" name="price" onChange={handleChange}/>
                     </div>
